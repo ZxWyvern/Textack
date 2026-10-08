@@ -1,6 +1,7 @@
 # textack/ui/fx.py
 import time
 
+
 def fade_out(stdscr, dur=0.45):
     """Fade out halus: overlay ░→▒→▓→█ lalu ke hitam. Optimasi: fill per baris."""
     import curses

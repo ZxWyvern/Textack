@@ -1,5 +1,7 @@
 # tests/test_enemies.py
 from textack.core import enemies
+
+
 def test_scout_wave1():
     c = enemies.for_wave(1)
     assert c.name == "SCOUT" and c.burst == 1

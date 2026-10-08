@@ -1,5 +1,7 @@
 # textack/core/state.py
 from dataclasses import dataclass, field
+
+
 @dataclass
 class GameState:
     wave: int = 1; level: int = 1; xp: float = 0.0; xp_next: float = 30.0

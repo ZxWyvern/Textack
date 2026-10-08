@@ -1,6 +1,10 @@
 # textack/core/combat.py
+from __future__ import annotations
+
 import random
 from dataclasses import dataclass
+
+
 @dataclass(frozen=True)
 class HitResult:
     dmg: int; tag: str; wpm: float; speed_bonus: int; perfect: bool; crit: bool; double: bool

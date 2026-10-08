@@ -1,5 +1,7 @@
 # tests/test_widgets.py
 from textack.ui import widgets
+
+
 class FakeScr:
     def __init__(self, h=24, w=80): self.h, self.w, self.calls = h, w, []
     def getmaxyx(self): return (self.h, self.w)

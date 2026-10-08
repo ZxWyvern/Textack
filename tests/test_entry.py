@@ -8,4 +8,4 @@ def test_version_exists():
 
 def test_main_importable():
     m = importlib.import_module("textack.__main__")
-    assert callable(getattr(m, "main"))
+    assert callable(m.main)

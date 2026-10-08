@@ -1,5 +1,7 @@
 # tests/test_combat.py
 from textack.core import combat, upgrades
+
+
 def test_perfect_crit_double_tags():
     s = upgrades.fresh_stats()
     s["crit"] = 1.0; s["double"] = 1.0; s["dmg_mult"] = 1.0

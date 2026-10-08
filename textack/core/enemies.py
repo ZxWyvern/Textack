@@ -1,5 +1,7 @@
 # textack/core/enemies.py
 from dataclasses import dataclass
+
+
 @dataclass(frozen=True)
 class EnemyConfig:
     name: str; interval: float; dmg: int; burst: int; hp: int; proj: str; col: str

@@ -1,5 +1,7 @@
 # tests/test_progression.py
 from textack.core import progression
+
+
 def test_ranks():
     assert progression.rank_for(10, 0) == "NEWBIE"
     assert progression.rank_for(25, 0) == "SCRIPT KIDDIE"

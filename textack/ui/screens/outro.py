@@ -21,7 +21,7 @@ def show(stdscr, P):
     last = t0
     while True:
         now = time.monotonic()
-        dt = min(0.05, now - last)
+        _dt = min(0.05, now - last)
         last = now
         h, w = stdscr.getmaxyx()
         cx = w // 2

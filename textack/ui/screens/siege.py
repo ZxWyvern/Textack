@@ -17,9 +17,8 @@ import time
 
 from textack import VERSION
 from textack.core import combat, enemies, progression, upgrades, words
-from textack.infra import quality
+from textack.infra import quality, storage, waifu
 from textack.infra import sfx as sfx_mod
-from textack.infra import storage, waifu
 from textack.ui import widgets
 from textack.ui.screens import upgrade as upgrade_screen
 
@@ -263,9 +262,8 @@ def show(stdscr, P):
                 target = words.pick_word(wave)
                 buf = ""
                 word_start = now
-            elif 32 <= key <= 126:
-                if len(buf) < 60:
-                    buf += chr(key)
+            elif 32 <= key <= 126 and len(buf) < 60:
+                buf += chr(key)
             key = stdscr.getch()
 
         elapsed_word = now - word_start
@@ -326,9 +324,7 @@ def show(stdscr, P):
             p["y"] += p["vy"] * dt
         arrived, keep = [], []
         for p in projectiles:
-            if p["side"] == "player" and p["y"] <= 8.5:
-                arrived.append(p)
-            elif p["side"] == "enemy" and p["y"] >= h - 8.5:
+            if p["side"] == "player" and p["y"] <= 8.5 or p["side"] == "enemy" and p["y"] >= h - 8.5:
                 arrived.append(p)
             else:
                 keep.append(p)
@@ -474,7 +470,7 @@ def show(stdscr, P):
                 try:
                     if chr(k).lower() == "q":
                         return
-                except Exception:
+                except Exception:  # noqa: BLE001, S110
                     pass
                 # Enter / space = retry
                 if k not in (10, 13, ord(" ")):

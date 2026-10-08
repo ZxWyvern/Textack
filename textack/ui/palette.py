@@ -39,7 +39,7 @@ def init():
                 pass
         else:
             raise ValueError("basic")
-    except Exception:
+    except Exception:  # noqa: BLE001, S110
         pass
     if not P:
         try:

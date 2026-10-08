@@ -1,6 +1,7 @@
 # tests/test_infra.py
-from pathlib import Path
-from textack.infra import storage, quality
+from textack.infra import quality, storage
+
+
 def test_corrupt_best_returns_defaults(tmp_path):
     p = tmp_path / "best.txt"; p.write_text("oops not numbers\n")
     assert storage.load_best(p) == {"wave": 0, "wpm": 0.0}

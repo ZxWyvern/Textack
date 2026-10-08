@@ -1,5 +1,7 @@
 # tests/test_upgrades.py
 from textack.core import upgrades
+
+
 def test_ammo_stacks():
     s = upgrades.fresh_stats()
     upgrades.apply("ammo", s)

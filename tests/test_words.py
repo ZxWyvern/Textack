@@ -1,6 +1,9 @@
 # tests/test_words.py
 import random
+
 from textack.core import words
+
+
 def test_wave1_only_tier1():
     rng = random.Random(0)
     for _ in range(50):

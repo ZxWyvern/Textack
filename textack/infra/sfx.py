@@ -1,4 +1,6 @@
 from pathlib import Path
+
+
 def detect_player():
     import shutil
     for b in ("paplay", "aplay", "play"):
@@ -20,6 +22,7 @@ def play(stdscr, sfx, name):
             return
         if name in ("miss", "hurt", "gameover"):
             try:
-                import curses; curses.beep()
-            except Exception: pass
-    except Exception: pass
+                import curses
+                curses.beep()
+            except Exception: pass  # noqa: BLE001, S110
+    except Exception: pass  # noqa: BLE001, S110

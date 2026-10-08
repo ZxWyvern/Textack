@@ -9,6 +9,7 @@ def main():
     os.environ.setdefault("ESCDELAY", "25")
     try:
         import curses
+
         from textack.ui.screens.loop import game_loop
         curses.wrapper(game_loop)
     except KeyboardInterrupt:
