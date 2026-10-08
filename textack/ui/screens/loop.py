@@ -29,8 +29,8 @@ def game_loop(stdscr):
             if nxt == "menu":
                 continue
         # lazy import: siege screen lands in T7
-        from textack.ui.screens import siege
+        from textack.ui.screens import siege as siege_mod
 
-        siege.show(stdscr, P)
+        siege_mod.show(stdscr, P)
         # balik ke menu setelah siege keluar (bikin loop nagih)
         continue
