@@ -17,6 +17,16 @@ python3 main.py
 
 Butuh hanya Python 3 standar, tanpa install tambahan. Jalan native di Linux terminal.
 
+## Dev
+
+```bash
+pip install -e .[dev]
+pytest -q
+ruff check textack tests
+```
+
+CI (`.github/workflows/ci.yml`) jalan di Python 3.9–3.13: pytest + ruff + compileall.
+
 ## Cara main
 - Kata target muncul, misal `sudo apt update`
 - Ketik persis sama + Enter
