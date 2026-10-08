@@ -29,7 +29,7 @@ middle, side effects at the edge.
 - `ui` may import `core` and `infra`. Owns all `curses` calls.
 - `infra` may import `core` (types/constants only).
 - Nothing imports `ui/screens/*` except the entry shim
-  (`textack/__main__.py` → `screens.loop.main`) and sibling screens.
+   (`textack/__main__.py` → `screens.loop.game_loop`) and sibling screens.
 
 Violations (e.g. `core` importing `curses`, a screen importing
 another screen's internals) fail review even if tests pass.
@@ -49,14 +49,14 @@ another screen's internals) fail review even if tests pass.
 | `textack/ui/fx.py` | ui | transitions | `fade_out(...)`, `fade_in_blank(...)` |
 | `textack/ui/screens/opening.py` | ui | title screen | — |
 | `textack/ui/screens/howto.py` | ui | help screen | — |
-| `textack/ui/screens/siege.py` | ui | main battle loop (delegates math to `core`) | `play(stdscr, sfx, name)` |
+| `textack/ui/screens/siege.py` | ui | main battle loop (delegates math to `core`) | `show(stdscr, P)` |
 | `textack/ui/screens/upgrade.py` | ui | level-up picker | — |
 | `textack/ui/screens/outro.py` | ui | game-over screen | — |
-| `textack/ui/screens/loop.py` | ui | screen sequencing | `main(...)` |
+| `textack/ui/screens/loop.py` | ui | screen sequencing | `game_loop(stdscr)` |
 | `textack/infra/storage.py` | infra | best score file | `load_best(...)`, `save_best(...)` |
-| `textack/infra/quality.py` | infra | LOW/HIGH terminal mode | `from_env(...)`, `effective_interval(...)`, `detect_player()` |
+| `textack/infra/quality.py` | infra | LOW/HIGH terminal mode | `from_env(...)`, `effective_interval(...)` |
 | `textack/infra/waifu.py` | infra | operator art | `load_art(...)` |
-| `textack/infra/sfx.py` | infra | sound (paplay/aplay/mpv, beep fallback, silent on miss) | `init(...)`, `play(...)` |
+| `textack/infra/sfx.py` | infra | sound (paplay/aplay/mpv, beep fallback, silent on miss) | `init(...)`, `play(...)`, `detect_player()` |
 | `main.py` / `textack/__main__.py` | entry | shims | — |
 
 Runtime needs stdlib only. Dev extras (`pip install -e .[dev]`)

@@ -1,19 +1,12 @@
 # textack/ui/screens/upgrade.py
 """Upgrade overlay — verbatim move from main.py:538-615 show_upgrade_overlay.
 
-Supports both Upgrade objects (T3 roll_choices) and dicts via _get helper.
+Supports both Upgrade objects (T3 roll_choices) and dicts via get_field helper.
 """
 import curses
 import time
 
-from textack.ui.widgets import safe_add
-
-
-def _get(u, k):
-    """Ledger ruling: Upgrade object (u.id) or dict (u['id'])."""
-    if isinstance(u, dict):
-        return u[k]
-    return getattr(u, k)
+from textack.ui.widgets import get_field, safe_add
 
 
 def show(stdscr, P, choices, level, owned):
@@ -66,7 +59,7 @@ def show(stdscr, P, choices, level, owned):
         # slide-in halus: offset mengecil seiring t
         slide = max(0, int(12 - t * 30))
         for i, u in enumerate(choices):
-            lv = owned.get(_get(u, "id"), 0)
+            lv = owned.get(get_field(u, "id"), 0)
             if wide:
                 bx = cx + (i - 1) * (cw + 3) - cw // 2
                 by = h // 2 - 5 + (slide if i == 1 else slide // 2)
@@ -85,11 +78,11 @@ def show(stdscr, P, choices, level, owned):
                 safe_add(stdscr, by + r, bx + cw - 1, "┃", border_attr)
             safe_add(stdscr, by + ch - 1, bx, bot, border_attr)
             # isi kartu
-            cat_col = {"ATTACK": P["red"], "DEFENSE": P["green"], "SPEED": P["cyan"], "BASE": P["magenta"]}.get(_get(u, "cat"), P["fg"])
-            safe_add(stdscr, by + 1, bx + 2, f"{_get(u, 'icon')} [{_get(u, 'cat')}]", cat_col)
-            safe_add(stdscr, by + 2, bx + 2, f"{i+1}. {_get(u, 'name')}"[: cw - 4], P["cyan"] | curses.A_BOLD if is_sel else P["fg"])
-            safe_add(stdscr, by + 3, bx + 2, _get(u, "desc")[: cw - 4], fill_attr)
-            safe_add(stdscr, by + 4, bx + 2, f"Lv {lv} → {lv+1}/{_get(u, 'max')}", P["yellow"] if is_sel else P["dim"])
+            cat_col = {"ATTACK": P["red"], "DEFENSE": P["green"], "SPEED": P["cyan"], "BASE": P["magenta"]}.get(get_field(u, "cat"), P["fg"])
+            safe_add(stdscr, by + 1, bx + 2, f"{get_field(u, 'icon')} [{get_field(u, 'cat')}]", cat_col)
+            safe_add(stdscr, by + 2, bx + 2, f"{i+1}. {get_field(u, 'name')}"[: cw - 4], P["cyan"] | curses.A_BOLD if is_sel else P["fg"])
+            safe_add(stdscr, by + 3, bx + 2, get_field(u, "desc")[: cw - 4], fill_attr)
+            safe_add(stdscr, by + 4, bx + 2, f"Lv {lv} → {lv+1}/{get_field(u, 'max')}", P["yellow"] if is_sel else P["dim"])
             if wide:
                 safe_add(stdscr, by + 5, bx + 2, "ENTER untuk ambil", P["dim"])
         stdscr.refresh()

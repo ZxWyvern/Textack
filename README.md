@@ -39,8 +39,7 @@ Detail: `docs/ARCHITECTURE.md`.
 - Musuh per wave: SCOUT → RAIDER → GOLEM → OVERLORD, tiap 5 wave BOSS.
 - Operator waifu AIKA di panel kanan (terminal ≥102 kolom).
   Ganti art: edit `waifu.txt` atau `~/.config/textack/waifu.txt`.
-- Suara: `sfx/*.wav` via paplay/aplay/mpv (fallback beep). F3 on/off.
-  Suara: taruh file `.wav` sesukamu di `sfx/` (hilang = diam, tidak crash).
+- Suara: `sfx/*.wav` via paplay/aplay/mpv (fallback beep, F3 on/off) — taruh file `.wav` sesukamu di `sfx/` (hilang = diam, tidak crash).
 - `:q` untuk keluar
 
 ## Contribute

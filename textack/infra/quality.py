@@ -6,4 +6,7 @@ def from_env(argv=None, env=None) -> int:
     if "--high" in a or "high" in a: return 0
     return 1
 def effective_interval(base: float, slow: float) -> float:
+    # Floor 2.4 is unreachable in practice: enemies.for_wave already clamps
+    # its interval to a 2.6 minimum, and slow only increases the interval,
+    # so the max() below always sees >= 2.6. Kept as a safety net, not a tuning knob.
     return max(2.4, base * (1.0 + slow))

@@ -21,6 +21,7 @@ from textack.infra import quality, storage, waifu
 from textack.infra import sfx as sfx_mod
 from textack.ui import widgets
 from textack.ui.screens import upgrade as upgrade_screen
+from textack.ui.widgets import get_field
 
 ENEMY_ART = [
     r"      |>>>|      ",
@@ -35,13 +36,6 @@ PLAYER_ART = [
     r"  |___         _____|  ",
     r"  |_|_|_______|_|_|_|  ",
 ]
-
-
-def _get(u, k):
-    """Ledger ruling: Upgrade object (u.id) or dict (u['id'])."""
-    if isinstance(u, dict):
-        return u[k]
-    return getattr(u, k)
 
 
 def show(stdscr, P):
@@ -242,6 +236,8 @@ def show(stdscr, P):
                     storage.save_best(storage.DEFAULT_BEST, wave, avg)
                 else:
                     # combo guard: peluang combo selamat
+                    # legacy showed GUARD even at combo 0 on a lucky roll;
+                    # current gates the message on combo>0 (message-only, no state delta).
                     kept = combat.combo_step(False, combo, stats["combo_guard"])
                     if combo > 0 and kept == combo:
                         msg = f"Hampir! combo x{combo} selamat (GUARD)"
@@ -249,7 +245,7 @@ def show(stdscr, P):
                     else:
                         combo = 0
                         msg = f"Meleset! '{buf}' != '{target}' — combo reset!"
-                    counter = ecfg.dmg + wave + random.randint(0, 4)
+                    counter = combat.miss_damage(ecfg.dmg, wave, random.randint(0, 4))
                     projectiles.append({"x": cx + random.randint(-6, 6), "y": 8.0, "vy": 26.0,
                                         "char": ecfg.proj, "attr": P[ecfg.col],
                                         "pending": float(counter), "side": "enemy",
@@ -395,18 +391,18 @@ def show(stdscr, P):
             stdscr.refresh()
             pick = upgrade_screen.show(stdscr, P, choices, level, owned)
             u = choices[pick]
-            upgrades.apply(_get(u, "id"), stats)
-            owned[_get(u, "id")] = owned.get(_get(u, "id"), 0) + 1
+            upgrades.apply(get_field(u, "id"), stats)
+            owned[get_field(u, "id")] = owned.get(get_field(u, "id"), 0) + 1
             base_lv += 1
             sfx_mod.play(stdscr, sfx, "select")
             set_mood("excited", 2.2)
-            if _get(u, "id") == "wall":
+            if get_field(u, "id") == "wall":
                 player_hp = min(stats["max_hp"], player_hp + 25)
             player_max = float(stats["max_hp"])
             spawn_explosion(cx, h - 8, P["green"], n=30)
-            floaters.append({"x": cx - 6, "y": h - 10.0, "text": f"+ {_get(u, 'name')}",
+            floaters.append({"x": cx - 6, "y": h - 10.0, "text": f"+ {get_field(u, 'name')}",
                              "life": 1.4, "max": 1.4, "attr": P["green"]})
-            msg = f"UPGRADE: {_get(u, 'name')} — {_get(u, 'desc')}"
+            msg = f"UPGRADE: {get_field(u, 'name')} — {get_field(u, 'desc')}"
             msg_t = 2.2
             # reset timer input biar adil setelah milih
             word_start = time.monotonic()

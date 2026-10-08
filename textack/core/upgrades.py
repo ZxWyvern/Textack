@@ -1,11 +1,11 @@
 # textack/core/upgrades.py (explicit functions, no lambdas; behavior identical to main.py:76-119)
 import random
+from dataclasses import dataclass
+from typing import Callable
 
 
 def fresh_stats() -> dict:
     return {"dmg_mult": 1.0, "crit": 0.05, "crit_mult": 2.0, "perfect_win": 1.2, "max_hp": 100.0, "regen": 0.0, "shield": 0.0, "repair": 0.0, "lifesteal": 0.0, "xp_mult": 1.0, "slow": 0.0, "combo_guard": 0.0, "turret": 0, "turret_dmg": 0.0, "double": 0.0, "speed_bonus": 0, "wall": 0}
-from dataclasses import dataclass
-from typing import Callable
 
 
 @dataclass(frozen=True)

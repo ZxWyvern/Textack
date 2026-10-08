@@ -23,7 +23,7 @@ No network, no build step.
 | core | `textack/core/` | pure logic, no curses, no I/O: `words.py`, `combat.py`, `enemies.py`, `upgrades.py`, `progression.py`, `state.py` | words, damage math, enemy stats, upgrades, rank/XP |
 | ui | `textack/ui/` | curses only: `palette.py`, `widgets.py`, `fx.py`, `screens/` (opening, howto, siege, upgrade, outro, loop) | screens, bars, panels, effects |
 | infra | `textack/infra/` | side effects: `storage.py` (best score), `quality.py` (LOW/HIGH), `waifu.py` (art), `sfx.py` (sound) | persistence, terminal compat, art, sound |
-| entry | `main.py`, `textack/__main__.py` | thin shims → `textack.ui.screens.loop.main` | nothing (keep thin) |
+| entry | `main.py`, `textack/__main__.py` | thin shims → `textack.ui.screens.loop.game_loop` | nothing (keep thin) |
 
 Import rule: **core → ui → infra, never backwards.**
 `core` imports stdlib only. `ui` may import `core` + `infra`.

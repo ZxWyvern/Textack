@@ -140,7 +140,7 @@ def show(stdscr, P):
                 if abs(sel_y - i) < 0.6:
                     # bar seleksi
                     safe_add(stdscr, y, x - 2, "━" * 34, P["cyan_dim"])
-                    safe_add(stdscr, y, x, item, P["cyan"] | curses.A_REVERSE if "COLOR" else P["cyan"])
+                    safe_add(stdscr, y, x, item, P["cyan"] | curses.A_REVERSE if "COLOR" else P["cyan"])  # inherited verbatim from legacy; always-truthy, kept for parity
                 else:
                     safe_add(stdscr, y, x, "  " + item.replace("▶  ", ""), P["dim"] if i != sel else P["fg"])
             # selector panah halus (interpolasi posisi)

@@ -11,4 +11,4 @@ def test_boss_scaling():
     assert c.interval >= 2.6
 def test_late_wave_cap():
     c = enemies.for_wave(30)
-    assert c.interval >= 2.4
+    assert c.interval >= 2.6

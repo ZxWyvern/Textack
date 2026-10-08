@@ -18,6 +18,14 @@ def safe_add(stdscr, y, x, s, attr=0):
     except curses.error:
         pass
 
+def get_field(obj, key):
+    """Ledger ruling: Upgrade object (u.id) or dict (u['id'])."""
+    try:
+        return obj[key]
+    except TypeError:
+        return getattr(obj, key)
+
+
 def hp_bar_str(cur, disp, total, width):
     total = max(1, total)
     pa = max(0, min(1, cur / total))
