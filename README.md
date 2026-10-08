@@ -21,11 +21,13 @@ Butuh hanya Python 3 standar, tanpa install tambahan. Jalan native di Linux term
 
 ```bash
 pip install -e .[dev]
-pytest -q
-ruff check textack tests
+python3 -m pytest -q
+python3 -m ruff check textack tests
 ```
 
 CI (`.github/workflows/ci.yml`) jalan di Python 3.9–3.13: pytest + ruff + compileall.
+Struktur kode: `textack/core/` (logika murni) → `textack/ui/` (curses) → `textack/infra/` (storage/suara/art).
+Detail: `docs/ARCHITECTURE.md`.
 
 ## Cara main
 - Kata target muncul, misal `sudo apt update`
@@ -38,8 +40,16 @@ CI (`.github/workflows/ci.yml`) jalan di Python 3.9–3.13: pytest + ruff + comp
 - Operator waifu AIKA di panel kanan (terminal ≥102 kolom).
   Ganti art: edit `waifu.txt` atau `~/.config/textack/waifu.txt`.
 - Suara: `sfx/*.wav` via paplay/aplay/mpv (fallback beep). F3 on/off.
-  Bikin ulang: `python3 tools/make_sfx.py`. Ganti file wav sesukamu.
+  Suara: taruh file `.wav` sesukamu di `sfx/` (hilang = diam, tidak crash).
 - `:q` untuk keluar
+
+## Contribute
+
+Mau nambah kata, upgrade, atau musuh? <10 baris saja —
+lihat `CONTRIBUTING.md` (quickstart 5 menit) dan
+`docs/adding-content.md` (3 resep copy-paste).
+Arsitektur singkat: `docs/ARCHITECTURE.md`.
+Good first issues: kata baru, rebalance musuh, upgrade baru.
 
 ## Roadmap
 1. [x] MVP single-player vs benteng (ini)
