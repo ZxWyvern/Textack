@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TEXTACK — typing = damage</title>
+<style>
+  :root {
+    --bg: #1a1b26; --panel: #24283b; --fg: #c0caf5;
+    --cyan: #7dcfff; --magenta: #bb9af7; --green: #9ece6a;
+    --yellow: #e0af68; --red: #f7768e; --dim: #565f89;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--fg);
+    font-family: "JetBrains Mono", "Fira Code", monospace; line-height: 1.6; }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 40px 20px 60px; }
+  .fun { display: inline-block; border: 1px solid var(--yellow); color: var(--yellow);
+    border-radius: 999px; padding: 4px 14px; font-size: 13px; margin-bottom: 18px; }
+  h1.logo { font-size: clamp(28px, 6vw, 54px); letter-spacing: 2px;
+    background: linear-gradient(90deg, var(--cyan), var(--magenta), var(--green), var(--yellow));
+    -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .tag { color: var(--dim); margin: 6px 0 24px; }
+  .term { background: #16161e; border: 1px solid #343a55; border-radius: 12px;
+    padding: 18px; margin: 24px 0; box-shadow: 0 12px 40px rgba(0,0,0,.45); }
+  .term .bar { display: flex; gap: 8px; margin-bottom: 12px; }
+  .dot { width: 12px; height: 12px; border-radius: 50%; }
+  #demo { min-height: 150px; white-space: pre-wrap; font-size: 15px; }
+  .g { color: var(--green); } .c { color: var(--cyan); }
+  .m { color: var(--magenta); } .y { color: var(--yellow); }
+  .r { color: var(--red); } .d { color: var(--dim); }
+  .caret::after { content: "█"; animation: blink 1s steps(1) infinite; color: var(--cyan); }
+  @keyframes blink { 50% { opacity: 0; } }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px; margin: 24px 0; }
+  .card { background: var(--panel); border: 1px solid #343a55; border-radius: 10px; padding: 14px; }
+  .card b { display: block; margin-bottom: 4px; }
+  .btns { display: flex; gap: 12px; flex-wrap: wrap; margin: 20px 0; }
+  a.btn { text-decoration: none; padding: 10px 22px; border-radius: 8px; font-weight: bold; }
+  .primary { background: var(--cyan); color: #16161e; }
+  .ghost { border: 1px solid var(--dim); color: var(--fg); }
+  pre.install { background: #16161e; border: 1px solid #343a55; border-radius: 10px;
+    padding: 14px; overflow-x: auto; margin: 16px 0; }
+  footer { margin-top: 36px; color: var(--dim); font-size: 13px;
+    border-top: 1px solid #343a55; padding-top: 16px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <span class="fun">side project — just for fun, have fun!</span>
+  <h1 class="logo">TEXTACK</h1>
+  <p class="tag">typing = damage &nbsp;//&nbsp; siege the fortress — game terminal Linux, 100% open source</p>
+
+  <div class="term">
+    <div class="bar">
+      <span class="dot" style="background:#f7768e"></span>
+      <span class="dot" style="background:#e0af68"></span>
+      <span class="dot" style="background:#9ece6a"></span>
+    </div>
+    <div id="demo" class="caret"></div>
+  </div>
+
+  <div class="btns">
+    <a class="btn primary" href="https://github.com/rewsaqy/Textack">★ GitHub</a>
+    <a class="btn ghost" href="#install">Cara main</a>
+  </div>
+
+  <div class="grid">
+    <div class="card"><b class="c">▲ Typing = Damage</b><span class="d">Ketik perintah Linux + Enter = tembakan. Makin cepat makin sakit.</span></div>
+    <div class="card"><b class="y">✦ Survivor Upgrades</b><span class="d">14 upgrade 4 kategori: ATTACK / DEFENSE / SPEED / BASE. Base Cannon nembak otomatis.</span></div>
+    <div class="card"><b class="r">▼ Wave Musuh</b><span class="d">SCOUT → RAIDER → GOLEM → OVERLORD. Tiap 5 wave BOSS. Interval + burst naik.</span></div>
+    <div class="card"><b class="g">♥ Edukasi</b><span class="d">Semua kata = perintah Linux asli. Main sambil hafal `grep`, `chmod`, `ps aux`.</span></div>
+    <div class="card"><b class="m">◆ AIKA + Suara</b><span class="d">Operator waifu bereaksi + SFX via paplay. Ganti art di waifu.txt, suara di sfx/.</span></div>
+  </div>
+
+  <h2 id="install" class="c">Jalankan</h2>
+  <pre class="install"><code>git clone https://github.com/rewsaqy/Textack.git
+cd Textack
+python3 main.py
+# atau pasang command: ln -s $PWD/main.py ~/.local/bin/textack && textack</code></pre>
+  <p class="d">Butuh hanya Python 3 standar (curses). Native Linux, 60fps, tanpa install tambahan.</p>
+
+  <footer>
+    made by rewsaqy • 2026<br>
+    GPL-3.0-or-later • 100% open source • have fun!
+  </footer>
+</div>
+<script>
+const lines = [
+  '<span class="g">● TEXTACK v1.0.00 — linux native • 60fps</span>',
+  '<span class="d">$ textack</span>',
+  '<span class="c">SERANG DENGAN: sudo apt update</span>',
+  '<span class="d">> sudo apt update█</span>',
+  '<span class="g">KENA -71 PERFECT CRIT | 0.9s | 82 WPM | combo 6</span>',
+  '<span class="y">✦ LEVEL 3 UP! + AUTO CANNON ⌖</span>',
+  '<span class="m">WAVE 4 RAIDER — SYSADMIN mode ON!</span>'
+];
+const el = document.getElementById('demo');
+let li = 0, ci = 0, out = [];
+function tick() {
+  if (li >= lines.length) { setTimeout(() => { li = 0; ci = 0; out = []; el.innerHTML = ''; tick(); }, 2600); return; }
+  const plain = lines[li].replace(/<[^>]+>/g, '');
+  ci++;
+  out[li] = lines[li].replace(plain, plain.slice(0, ci));
+  el.innerHTML = out.join('\n');
+  if (ci >= plain.length) { li++; ci = 0; setTimeout(tick, 500); }
+  else setTimeout(tick, 24);
+}
+tick();
+</script>
+</body>
+</html>
